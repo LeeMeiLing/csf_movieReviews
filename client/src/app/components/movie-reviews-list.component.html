@@ -1,0 +1,39 @@
+<span>
+    Search Result
+    &nbsp;
+    <button [routerLink]="['/']">Back</button>
+</span>
+<br><br>
+
+<div *ngIf="reviewList; else noResult">
+    <div *ngFor="let r of reviewList; let i = index">
+        <span *ngIf="r.image != null">
+            <img src="{{r.image}}"  width="200px">
+        </span>
+        <span *ngIf="r.image == null">
+            <img src="../assets/placeholder.jpg"  width="200px">
+        </span>
+
+        <span>
+            <p>
+                <span>
+                    <a href="{{r.reviewURL}}" target="_blank">{{r.title}}</a>
+                </span>
+                <span>
+                    {{r.rating}}
+                </span>
+            </p>
+            <p> {{r.headline}}</p>
+            <p> {{r.summary}}</p>
+            <p> Comments: {{r.commentCount}}</p>
+            <button (click)="goCommentPage(r.title)">Comment</button>
+        </span>
+        <hr>
+    </div>
+</div>
+
+<ng-template #noResult>
+    <div *ngIf="noResultFound">
+        Your search produces no result
+    </div>
+</ng-template>
